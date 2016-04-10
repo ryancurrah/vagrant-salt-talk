@@ -22,6 +22,8 @@ Vagrant.configure(2) do |config|
       yum -y install ruby
       # Allow jenkins user to run docker commands
       sed -i "s/OPTIONS='--selinux-enabled'/OPTIONS='--selinux-enabled -G jenkins'/g" /etc/sysconfig/docker
+      # Ignore docker warnings about storage loop0
+      sed -i "s/DOCKER_STORAGE_OPTIONS=/DOCKER_STORAGE_OPTIONS=--storage-opt dm.no_warn_on_loop_devices=true/g" /etc/sysconfig/docker-storage
       systemctl enable docker
       systemctl start docker
       rpm -ivh /vagrant/jdk-8u77-linux-x64.rpm
