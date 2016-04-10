@@ -1,0 +1,6 @@
+*.txt
+*.rpm
+*.pptx
+*git
+.vagrant
+.idea
