@@ -20,6 +20,8 @@ Vagrant.configure(2) do |config|
       yum -y install git
       yum -y install docker
       yum -y install ruby
+      # Allow jenkins user to run docker commands
+      sed -i "s/OPTIONS='--selinux-enabled'/OPTIONS='--selinux-enabled -G jenkins'/g" /etc/sysconfig/docker
       systemctl enable docker
       systemctl start docker
       rpm -ivh /vagrant/jdk-8u77-linux-x64.rpm
