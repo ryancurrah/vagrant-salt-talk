@@ -26,6 +26,9 @@ Vagrant.configure(2) do |config|
       sed -i "s/DOCKER_STORAGE_OPTIONS=/DOCKER_STORAGE_OPTIONS=--storage-opt dm.no_warn_on_loop_devices=true/g" /etc/sysconfig/docker-storage
       systemctl enable docker
       systemctl start docker
+      # Install pip and bumpversion
+      curl -o "/tmp/get-pip.py" "https://bootstrap.pypa.io/get-pip.py"; python /tmp/get-pip.py; rm -rf /tmp/get-pip.py
+      pip install bumpversion
       rpm -ivh /vagrant/jdk-8u77-linux-x64.rpm
       rpm -ivh /vagrant/jenkins-2.0-1.1.noarch.rpm
       systemctl enable jenkins
